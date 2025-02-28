@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+<div class="container mx-auto justify-center pt-6 items-center ">
+
+    <h1 class="text-3xl font-bold text-center mt-10 mb-5 text-gray-900 dark:text-white flex justify-center">Register</h1>
+
+    <div class="max-w-sm mx-auto flex items-center mt-10 flex-col">
+        {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+        <div class="mb-5">
+        {{ form_row(registrationForm.username) }}
+        </div>
+
+        <div class="mb-5">
+        {{ form_row(registrationForm.email) }}
+        </div>
+
+        <div class="mb-5">
+        {{ form_row(registrationForm.plainPassword) }}
+
+
+        </div>
+
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        {{ form_end(registrationForm) }}
+    </div>
+
+{% endblock %}
