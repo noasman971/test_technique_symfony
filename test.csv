@@ -1,0 +1,8 @@
+username;email;password;roles;rank;victoire;defaite
+test_01;test_01@test.fr;qwerty123;ROLE_USER;Silver;5;5
+test_02;test_02@test.fr;qwerty123;ROLE_USER;Iron;0;10
+test_03;test_03@test.fr;qwerty123;ROLE_USER;Gold;6;4
+test_04;test_04@test.fr;qwerty123;ROLE_USER;Platine;7;3
+test_05;test_05@test.fr;qwerty123;ROLE_USER;Diamant;15;4
+test_06;test_06@test.fr;qwerty123;ROLE_ADMIN;;;
+test_07;test_07@test.fr;qwerty123;ROLE_USER;;;
