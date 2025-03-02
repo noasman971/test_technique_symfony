@@ -27,7 +27,17 @@
 
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         {{ form_end(profileForm) }}
+    <div class="max-w-sm mx-auto flex items-center mt-10 flex-col">
+        <h1 class="text-3xl font-bold text-center mt-10 mb-5 text-gray-900 dark:text-white flex justify-center">Delete your account</h1>
+        <form class="max-w-sm mx-auto flex items-center flex-col" method="post" action="{{ path('app_profil_delete', {'id': app.user.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+
+            <div class="mb-5">
+            <input type="submit" value="Delete" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            </div>
+        </form>
     </div>
+
 
 
 {% endblock %}

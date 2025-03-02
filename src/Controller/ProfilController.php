@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 final class ProfilController extends AbstractController
 {
@@ -53,6 +57,21 @@ final class ProfilController extends AbstractController
             'profileForm' => $form,
         ]);
 
+    }
+
+    #[Route('/profil/delete/{id}', name: 'app_profil_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            // Logout the user before remove it
+            $tokenStorage->setToken(null);
+            $session->invalidate();
+
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_register');
     }
 
 }
