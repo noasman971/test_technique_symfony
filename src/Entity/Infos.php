@@ -13,7 +13,7 @@ class Infos
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, name: "`rank`")]
     private string $rank;
 
     #[ORM\Column(type: 'string', length: 255)]

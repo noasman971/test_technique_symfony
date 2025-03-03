@@ -2,19 +2,94 @@
 
 {% block title %}Hello AdminController!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block main %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/noasman/Desktop/PHPProject/test_technique/src/Controller/AdminController.php</code></li>
-        <li>Your template at <code>/Users/noasman/Desktop/PHPProject/test_technique/templates/admin/index.html.twig</code></li>
-    </ul>
-</div>
+            <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Pseudo
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Adresse-email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        rank
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Victoire
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Défaite
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% for info in infos %}
+
+
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ info.id }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ info.user.username }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ info.user.email }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ info.rank }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <form action="{{ path('app_admin_edit',{'id': info.id} ) }}" method="post">
+
+                        <input type="number" name="victory" class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white" value="{{ info.victory }}" min="0" onchange="this.form.submit()" >
+                        </form>
+
+                    </td>
+                    <td class="px-6 py-4">
+                        <form action="{{ path('app_admin_edit',{'id': info.id} ) }}" method="post">
+
+                        <input type="number" name="defeat" class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:text-white" value="{{ info.defeat }}" min="0" onchange="this.form.submit()" >
+                        </form>
+
+                    </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <div class="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
+                <h2 class="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">Importez votre fichier csv pour ajouter des utilisateurs</h2>
+            </div>
+        </div>
+    </section>
+    <div class="flex items-center justify-center w-full">
+        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">CSV files</p>
+            </div>
+            <input id="dropzone-file" type="file" accept=".csv" class="hidden" />
+        </label>
+    </div>
+
+
 {% endblock %}
