@@ -94,7 +94,8 @@ final class AdminController extends AbstractController
                 }
 
                 $findDuplicate = $entityManager->getRepository(User::class)->find($data[0]);
-                if($findDuplicate){
+                if ($findDuplicate) {
+
                     continue;
                 }
 
@@ -108,7 +109,7 @@ final class AdminController extends AbstractController
                 $users->setPassword($data[2]);
                 $plainPassword = $data[2];
                 $users->setPassword($userPasswordHasher->hashPassword($users, $plainPassword));
-                $users->setRoles([$data[3]]); // Symfony attend un tableau pour les rôles
+                $users->setRoles([$data[3]]);
                 $infos->setUser($users);
                 $infos->setRank($data[4]);
 
@@ -118,6 +119,7 @@ final class AdminController extends AbstractController
                 $em->persist($users);
                 $em->persist($infos);
             }
+
             fclose($gestion);
             $em->flush();
 
