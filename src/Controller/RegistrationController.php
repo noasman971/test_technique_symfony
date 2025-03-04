@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Infos;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,7 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+        $infos = new Infos();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -31,6 +33,15 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
+
+
+            $infos->setRank("N/A");
+            $infos->setUser($user);
+            $infos->setVictory("0");
+            $infos->setDefeat("0");
+            $entityManager->persist($infos);
+            $entityManager->flush();
+
 
             return $this->redirectToRoute('app_home');
         }

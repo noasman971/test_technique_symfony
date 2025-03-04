@@ -5,7 +5,7 @@
 {% block main %}
 <div class="container mx-auto justify-center pt-6 items-center ">
 
-    <h1 class="text-3xl font-bold text-center mt-10 mb-5 text-gray-900 dark:text-white flex justify-center">Register</h1>
+    <h1 class="text-3xl font-bold text-center mt-10 mb-5 text-gray-900 dark:text-white flex justify-center">{% trans %}Register{% endtrans %}</h1>
 
     <div class="max-w-sm mx-auto flex items-center mt-10 flex-col">
         {{ form_errors(registrationForm) }}
@@ -25,7 +25,7 @@
 
         </div>
 
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{% trans %}Sign up{% endtrans %}</button>
         {{ form_end(registrationForm) }}
     </div>
 

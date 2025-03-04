@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -22,7 +21,6 @@ final class ProfilController extends AbstractController
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser()) {
-            // Redirige ou affiche un message si non connecté
             return $this->redirectToRoute('app_login');
         }
         $user = $this->getUser();
@@ -43,9 +41,6 @@ final class ProfilController extends AbstractController
             if(!empty($form->get('roles')->getData())) {
                 $user->setRoles($form->get('roles')->getData());
             }
-
-
-
 
             $entityManager->persist($user);
             $entityManager->flush();
