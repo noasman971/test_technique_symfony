@@ -44,7 +44,11 @@ final class AdminController extends AbstractController
     public function edit(EntityManagerInterface $entityManager, Request $request, int $id): Response
     {
         $infos = $entityManager->getRepository(Infos::class)->find($id);
-
+        if (!$infos) {
+            throw $this->createNotFoundException(
+                'No Infos found for id '.$id
+            );
+        }
 
         $victory = $request->request->get('victory');
         $defeat = $request->request->get('defeat');
@@ -81,7 +85,6 @@ final class AdminController extends AbstractController
 
         $pathname = $file->getPathname();
         $firstline =0;
-        $cansend = true;
         if (($gestion = fopen($pathname, "r")) !== false) {
             while (($data = fgetcsv($gestion, 10000, ";")) !== FALSE) {
 
@@ -93,9 +96,6 @@ final class AdminController extends AbstractController
                 $findDuplicate = $entityManager->getRepository(User::class)->find($data[0]);
                 if($findDuplicate){
                     continue;
-                }
-                else{
-                    $cansend = false;
                 }
 
 
@@ -119,9 +119,7 @@ final class AdminController extends AbstractController
                 $em->persist($infos);
             }
             fclose($gestion);
-            if($cansend){
-                $em->flush();
-            }
+            $em->flush();
 
         }
 
